@@ -1,13 +1,12 @@
 package com.iesemilidarder.anicolau.controller;
-import com.iesemilidarder.anicolau.data.Activities;
-import com.iesemilidarder.anicolau.service.ActivitiesService;
 import com.iesemilidarder.anicolau.service.ICountryService;
 import java.util.List;
 import com.iesemilidarder.anicolau.zItems.FirstBean.Country;
 import com.iesemilidarder.anicolau.zItems.FirstBean.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 public class MyController {
@@ -57,10 +56,29 @@ public class MyController {
 
 /* El {id} Para que muestre un producto específico no llega a funcionar */
 
-    @RequestMapping(value = "/getProductById/{id}", method= RequestMethod.GET)
-    public Product getProductById(@PathVariable Integer id, Product X1){
-        Product product = ProductService.getProductById(id);
-        return product;
+
+    @RequestMapping(value = "/getProductById/{id}", method = GET)
+    @ResponseBody
+    public Product getProductById(
+            @PathVariable(value="id") Integer id) {
+        for (Product item:countryService.findProducts()) {
+            if(id!=null&&id==null && item.getId()==id){
+
+               System.out.println();
+               //System.out.println("Descripción:"+id);
+            }
+        }
+        return   null;
     }
+
+/*
+    @RequestMapping(value = "/getProductById/{id}", method = GET)
+    @ResponseBody
+    public Product getProductById(
+            @PathVariable Integer id,String item) {
+        return "Get a specific Description with id=" + id+","+item+","+Product;
+    }
+
+*/
 
 }
